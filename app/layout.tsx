@@ -54,7 +54,7 @@ export const metadata: Metadata = {
 }
 
 const jsonLd = {
-  "@context": "https://schema.org",
+  "@context": "https://schema.org/",
   "@type": "Bakery",
   name: "Janine Bicca Doces",
   url: "https://janinebiccadoces.com.br/",
