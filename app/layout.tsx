@@ -7,7 +7,8 @@ import { Header } from "@/components/header"
 import { QuoteBagProvider } from "@/components/quote-bag-provider"
 import { QuoteBag } from "@/components/quote-bag"
 import { ThemeProvider } from "@/components/theme-provider"
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics } from "@next/third-parties/google"
+import Script from "next/script"
 
 const geist = Geist({
   subsets: ["latin"],
@@ -25,48 +26,64 @@ export const metadata: Metadata = {
   description:
     "Doces finos artesanais de alta qualidade e sabor inigualável em Porto Alegre e Região Sul. Trufas, brigadeiros gourmet e sabores exclusivos para tornar seus momentos especiais.",
   verification: {
-    google: 'CLuHdnnWRYWbGx-XmzLLP9aaobreqC7xtRV08FM1fWcg',
+    google: "CLuHdnnWRYWbGx-XmzLLP9aaobreqC7xtRV08FM1fWcg",
   },
-  keywords: "doces finos, trufas, brigadeiros gourmet, Porto Alegre, doces artesanais, presentes, eventos",
+  keywords:
+    "doces finos, trufas, brigadeiros gourmet, Porto Alegre, doces artesanais, presentes, eventos",
   openGraph: {
     title: "Janine Bicca – Doces Finos",
     description: "Doces finos artesanais de alta qualidade para seus momentos especiais",
+    url: "https://janinebiccadoces.com.br/",
+    siteName: "Janine Bicca Doces",
     locale: "pt_BR",
+    type: "website",
+    images: [{ url: "https://janinebiccadoces.com.br/og.jpg" }],
   },
-  generator: "v0.app",
+  alternates: {
+    canonical: "https://janinebiccadoces.com.br/",
+  },
   icons: {
     icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.png", // Nome do arquivo que você colocou na pasta /public ou /app
-        type: "image/png", // O MIME type correto para arquivos PNG
-      },
+      { url: "/icon-light-32x32.png", media: "(prefers-color-scheme: light)" },
+      { url: "/icon-dark-32x32.png", media: "(prefers-color-scheme: dark)" },
+      { url: "/icon.png", type: "image/png" },
     ],
     apple: "/apple-icon.png",
   },
+  themeColor: "#ffffff",
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  name: "Janine Bicca Doces",
+  url: "https://janinebiccadoces.com.br/",
+  image: "https://janinebiccadoces.com.br/og.jpg",
+  telephone: "+5551998116188",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Porto Alegre",
+    addressRegion: "RS",
+    addressCountry: "BR",
+  },
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${geist.variable} ${playfair.variable}`} suppressHydrationWarning>
       <body className="font-sans antialiased">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
-          disableTransitionOnChange={false}
-        >
+        {/* JSON-LD (SEO) */}
+        <Script
+          id="jsonld-janine"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
+        {/* Google Analytics (gtag) */}
+        <GoogleAnalytics gaId="G-HHN730JGCJ" />
+
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <QuoteBagProvider>
             <Header />
             {children}
@@ -75,7 +92,6 @@ export default function RootLayout({
           </QuoteBagProvider>
         </ThemeProvider>
       </body>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-HHN730JGCJ"></script>
     </html>
   )
 }
