@@ -54,6 +54,14 @@ export default function MonteSuaCaixaPage() {
     : precosPorCategoria[selectedCategoryId as keyof typeof precosPorCategoria] ?? 0
   const totalPrice = selectedSize ? unitPrice * selectedSize.quantity : 0
   const slotsRemaining = Math.max(0, 4 - selectedFlavors.length)
+  const selectedCategoryLabel = categorias.find((cat) => cat.id === selectedCategoryId)?.label
+  const saboresFiltrados = useMemo(() => {
+    if (!selectedCategoryLabel || selectedCategoryLabel.toLowerCase() === "todas") {
+      return saboresDisponiveis
+    }
+    const target = selectedCategoryLabel.toLowerCase()
+    return saboresDisponiveis.filter((flavor) => flavor.category.toLowerCase() === target)
+  }, [selectedCategoryLabel])
 
   useEffect(() => {
     const editId = searchParams.get("editId")
@@ -284,8 +292,8 @@ export default function MonteSuaCaixaPage() {
                   </div>
 
                   <div className="mb-6">
-                    <div className="flex items-center justify-between p-4 bg-secondary rounded-lg">
-                      <span className="font-semibold">Sabores selecionados:</span>
+                    <div className="flex items-center justify-between p-4 rounded-lg bg-card border border-border/60 text-foreground">
+                      <span className="font-semibold text-foreground">Sabores selecionados:</span>
                       <span className="text-lg">
                         <span className="text-primary font-bold">{selectedFlavors.length}</span> / 4
                       </span>
@@ -293,7 +301,7 @@ export default function MonteSuaCaixaPage() {
                   </div>
 
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {saboresDisponiveis.map((flavor) => {
+                    {saboresFiltrados.map((flavor) => {
                       const isSelected = selectedFlavors.includes(flavor.id)
                       const isDisabled = selectedFlavors.length >= 4 && !isSelected
 

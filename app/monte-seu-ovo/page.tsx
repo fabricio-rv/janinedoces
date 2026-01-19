@@ -206,8 +206,8 @@ export default function MonteSeuOvoPage() {
                   </div>
 
                   <div className="mb-6">
-                    <div className="flex items-center justify-between p-4 bg-secondary rounded-lg">
-                      <span className="font-semibold">Recheios selecionados:</span>
+                    <div className="flex items-center justify-between p-4 rounded-lg bg-card border border-border/60 text-foreground">
+                      <span className="font-semibold text-foreground">Recheios selecionados:</span>
                       <span className="text-lg">
                         <span className="text-primary font-bold">{selectedFillings.length}</span> / 3
                       </span>
@@ -258,8 +258,8 @@ export default function MonteSeuOvoPage() {
                   </div>
 
                   <div className="mb-6">
-                    <div className="flex items-center justify-between p-4 bg-secondary rounded-lg">
-                      <span className="font-semibold">Adicionais selecionados:</span>
+                    <div className="flex items-center justify-between p-4 rounded-lg bg-card border border-border/60 text-foreground">
+                      <span className="font-semibold text-foreground">Adicionais selecionados:</span>
                       <span className="text-lg">
                         <span className="text-primary font-bold">{selectedToppings.length}</span> / {maxToppings}
                       </span>
