@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
@@ -51,7 +51,9 @@ export const metadata: Metadata = {
     apple: "/apple-icon.png",
   },
 }
-export const viewport = {
+
+// ✅ themeColor vai AQUI (Next 16)
+export const viewport: Viewport = {
   themeColor: "#ffffff",
 }
 
@@ -74,7 +76,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" className={`${geist.variable} ${playfair.variable}`} suppressHydrationWarning>
       <body className="font-sans antialiased">
-        {/* JSON-LD (SEO) */}
         <Script
           id="jsonld-janine"
           type="application/ld+json"
@@ -82,7 +83,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        {/* Google Analytics (gtag) */}
         <GoogleAnalytics gaId="G-HHN730JGCJ" />
 
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
