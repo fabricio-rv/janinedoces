@@ -17,10 +17,10 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <>
       <Card
-        className="overflow-hidden border-2 hover:border-primary transition-all group cursor-pointer"
+        className="overflow-hidden border-2 hover:border-primary transition-all group cursor-pointer p-0"
         onClick={() => setIsModalOpen(true)}
       >
-        <div className="aspect-square relative overflow-hidden bg-muted">
+        <div className="aspect-square relative overflow-hidden bg-muted w-full">
           <img
             src={`/.jpg?height=400&width=400&query=${product.image}`}
             alt={product.name}
@@ -36,17 +36,16 @@ export function ProductCard({ product }: ProductCardProps) {
             </div>
           )}
         </div>
-        <div className="p-6">
-          <h3 className="text-xl font-serif font-semibold mb-2 group-hover:text-primary transition-colors">
+        <div className="px-4 pb-4 pt-2 flex flex-col gap-3">
+          <h3 className="text-xl font-serif font-semibold group-hover:text-primary transition-colors">
             {product.name}
           </h3>
-          <p className="text-sm text-muted-foreground mb-4">{product.minOrder}</p>
-          <div className="flex items-center justify-between">
-            <span className="text-2xl font-bold text-primary">R$ {product.price.toFixed(2)}</span>
-            <Button size="sm" className="bg-primary hover:bg-primary/90">
-              Ver detalhes
-            </Button>
-          </div>
+          <p className="text-xs font-semibold uppercase tracking-wider text-stone-500">
+            {product.category}
+          </p>
+          <Button size="sm" className="bg-primary hover:bg-primary/90">
+            Ver detalhes
+          </Button>
         </div>
       </Card>
 

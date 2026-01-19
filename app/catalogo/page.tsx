@@ -5,14 +5,36 @@ import { Calculator, Search, X } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ALL_PRODUCTS, CATEGORIES, MOODS, OCCASIONS } from "@/data"
+import { ALL_PRODUCTS } from "@/data"
 import { ProductCard } from "@/components/product-card"
 import { Footer } from "@/components/footer"
 import { PartyCalculator } from "@/components/party-calculator"
 
-const moods = MOODS
-const categories = CATEGORIES
-const occasions = OCCASIONS
+const moods = ["Para Presente", "Para Festas", "Sofisticados", "Lembrancinhas", "Infantil", "Edição Limitada"]
+
+const categories = [
+  "Doces Tradicionais",
+  "Brigadeiros Gourmet",
+  "Doces Finos",
+  "Trufas",
+  "Ovos de Colher",
+  "Kits Especiais",
+]
+
+const occasions = [
+  "Batizado",
+  "Dia das Crianças",
+  "Dia das Mães",
+  "Dia dos Namorados",
+  "Dia dos Pais",
+  "Festa Junina",
+  "Maternidade",
+  "Chá de Bebê",
+  "Páscoa",
+  "Formatura",
+  "Casamento",
+  "15 Anos",
+]
 
 export default function CatalogoPage() {
   const [searchQuery, setSearchQuery] = useState("")

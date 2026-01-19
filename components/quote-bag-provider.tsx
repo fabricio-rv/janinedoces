@@ -9,16 +9,27 @@ export interface QuoteItem {
   quantity: number
   minOrder: string
   image: string
+  type?: "box" | "egg"
+  categoryId?: string
+  sizeId?: string
+  flavors?: string[]
+  truffleType?: "grande" | "media"
+  shellId?: string
+  fillings?: string[]
+  toppings?: string[]
 }
 
 interface QuoteBagContextType {
   items: QuoteItem[]
   isOpen: boolean
   addItem: (item: QuoteItem) => void
+  updateItem: (id: string, updatedItem: QuoteItem) => void
   removeItem: (id: string) => void
   updateQuantity: (id: string, quantity: number) => void
   clearBag: () => void
   toggleBag: () => void
+  openBag: () => void
+  closeBag: () => void
 }
 
 const QuoteBagContext = createContext<QuoteBagContextType | undefined>(undefined)
@@ -37,6 +48,10 @@ export function QuoteBagProvider({ children }: { children: ReactNode }) {
     })
   }
 
+  const updateItem = (id: string, updatedItem: QuoteItem) => {
+    setItems((prev) => prev.map((item) => (item.id === id ? updatedItem : item)))
+  }
+
   const removeItem = (id: string) => {
     setItems((prev) => prev.filter((i) => i.id !== id))
   }
@@ -51,6 +66,8 @@ export function QuoteBagProvider({ children }: { children: ReactNode }) {
 
   const clearBag = () => setItems([])
   const toggleBag = () => setIsOpen((prev) => !prev)
+  const openBag = () => setIsOpen(true)
+  const closeBag = () => setIsOpen(false)
 
   return (
     <QuoteBagContext.Provider
@@ -58,10 +75,13 @@ export function QuoteBagProvider({ children }: { children: ReactNode }) {
         items,
         isOpen,
         addItem,
+        updateItem,
         removeItem,
         updateQuantity,
         clearBag,
         toggleBag,
+        openBag,
+        closeBag,
       }}
     >
       {children}

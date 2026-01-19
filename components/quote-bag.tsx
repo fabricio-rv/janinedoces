@@ -1,16 +1,18 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from "lucide-react"
+import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, Pencil } from "lucide-react"
 import { useQuoteBag } from "@/components/quote-bag-provider"
 
 export function QuoteBag() {
-  const { items, isOpen, toggleBag, updateQuantity, removeItem, clearBag } = useQuoteBag()
+  const { items, isOpen, toggleBag, updateQuantity, removeItem, clearBag, closeBag } = useQuoteBag()
+  const router = useRouter()
   const [step, setStep] = useState<"bag" | "checkout">("bag")
   const [formData, setFormData] = useState({
     name: "",
@@ -23,6 +25,13 @@ export function QuoteBag() {
 
   const handleCheckout = () => {
     setStep("checkout")
+  }
+
+  const handleEditItem = (itemId: string, type?: "box" | "egg") => {
+    const targetRoute = type === "egg" ? "/monte-seu-ovo" : "/monte-sua-caixa"
+    router.push(`${targetRoute}?editId=${itemId}`)
+    setStep("bag")
+    closeBag()
   }
 
   const handleSendToWhatsApp = () => {
@@ -95,9 +104,24 @@ export function QuoteBag() {
                         <p className="text-primary font-semibold">R$ {item.price.toFixed(2)}</p>
                       </div>
                       <div className="flex flex-col items-end justify-between">
-                        <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => removeItem(item.id)}>
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
+                        <div className="flex items-center gap-1">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8"
+                            onClick={() => handleEditItem(item.id, item.type)}
+                          >
+                            <Pencil className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8"
+                            onClick={() => removeItem(item.id)}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
                         <div className="flex items-center gap-2">
                           <Button
                             variant="outline"

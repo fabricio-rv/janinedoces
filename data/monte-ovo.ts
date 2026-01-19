@@ -54,7 +54,7 @@ export const dadosMonteOvoPascoa = {
     {
       id: "mix-nuts",
       label: "Mix de Nuts e Frutas Nobres",
-      description: "Avelã, nozes, castanha, damasco, passas, amêndoas e amendoim",
+      description: "Avelã, nozes, castanha, damasco, passas de uva, amêndoas, amendoim",
     },
   ],
 }

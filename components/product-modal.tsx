@@ -1,12 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import Link from "next/link"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Minus, Plus, ShoppingBag } from "lucide-react"
 import type { Product } from "@/data/types"
-import { useQuoteBag } from "@/components/quote-bag-provider"
 
 interface ProductModalProps {
   product: Product
@@ -15,107 +13,92 @@ interface ProductModalProps {
 }
 
 export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
-  const [quantity, setQuantity] = useState(1)
-  const { addItem } = useQuoteBag()
-
-  const handleAddToBag = () => {
-    addItem({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      quantity,
-      minOrder: product.minOrder,
-      image: product.image,
-    })
-    onClose()
-    setQuantity(1)
-  }
+  // Função auxiliar para garantir que a imagem carregue corretamente
+  const imageSrc = product.image.startsWith('http') 
+    ? product.image 
+    : `/${product.image.replace(/^\//, '')}`
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto md:max-w-[1000px] md:p-10">
-        <DialogHeader>
-          <DialogTitle className="text-3xl font-serif">{product.name}</DialogTitle>
-        </DialogHeader>
-
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.1fr] gap-8 md:gap-12">
-          {/* Product Image */}
-          <div className="aspect-square rounded-lg overflow-hidden bg-muted">
+      {/* AJUSTES MOBILE VS DESKTOP:
+        - Mobile: overflow-y-auto (A tela toda rola).
+        - Desktop (md): overflow-hidden (A tela trava, só rola o texto dentro).
+      */}
+      <DialogContent className="w-screen h-[100dvh] max-w-none rounded-none m-0 p-0 overflow-y-auto md:overflow-hidden md:max-w-6xl md:h-auto md:min-h-[650px] md:rounded-xl md:m-auto bg-background border-none flex flex-col md:block">
+        
+        <div className="flex flex-col min-h-full md:flex-row md:h-full">
+          
+          {/* --- COLUNA DA IMAGEM --- 
+             Mobile: aspect-square (Quadrado perfeito). Isso deixa a imagem GRANDE e proporcional.
+             Desktop: w-1/2 e altura automática preenchendo a lateral.
+          */}
+          <div className="relative w-full shrink-0 aspect-square bg-muted md:aspect-auto md:w-1/2 md:h-auto">
             <img
-              src={`/.jpg?height=600&width=600&query=${product.image}`}
+              src={imageSrc}
               alt={product.name}
               className="w-full h-full object-cover"
             />
           </div>
 
-          {/* Product Details */}
-          <div className="flex flex-col">
-            {/* Badges */}
+          {/* --- COLUNA DO TEXTO --- 
+             Mobile: Apenas flui naturalmente (sem travas de rolagem).
+             Desktop: flex-1 + overflow-y-auto (Cria a barra de rolagem só aqui).
+          */}
+          <div className="flex flex-col p-6 md:flex-1 md:overflow-y-auto md:p-12 md:h-auto">
+            
+            <DialogHeader className="text-left">
+              {/* TÍTULO */}
+              <DialogTitle className="text-3xl md:text-5xl font-serif font-bold text-foreground leading-tight">
+                {product.name}
+              </DialogTitle>
+            </DialogHeader>
+
+            {/* CATEGORIA/BADGES */}
             {product.badges.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="flex flex-wrap gap-2 mt-4 mb-6 md:mt-6 md:mb-8">
                 {product.badges.map((badge) => (
-                  <Badge key={badge} variant="secondary">
+                  <Badge key={badge} variant="secondary" className="px-3 py-1 text-sm md:text-base font-medium">
                     {badge}
                   </Badge>
                 ))}
               </div>
             )}
 
-            {/* Description */}
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              {product.description || "Doce fino artesanal feito com ingredientes premium e muito carinho."}
+            {/* DESCRIÇÃO */}
+            <p className="text-base md:text-xl text-muted-foreground leading-relaxed mb-8 md:mb-10">
+              {product.description || "Doce fino artesanal feito com ingredientes premium e muito carinho para tornar seu momento inesquecível."}
             </p>
 
-            {/* Premium Ingredients */}
-            <div className="mb-6">
-              <h4 className="font-semibold mb-2">Sabores disponíveis:</h4>
-              <p className="text-sm text-muted-foreground">{product.flavors.join(", ")}</p>
-            </div>
-
-            {/* Occasions */}
-            <div className="mb-6">
-              <h4 className="font-semibold mb-2">Ideal para:</h4>
-              <div className="flex flex-wrap gap-2">
-                {product.occasions.slice(0, 3).map((occasion) => (
-                  <Badge key={occasion} variant="outline">
-                    {occasion}
-                  </Badge>
-                ))}
+            {/* SEÇÃO DE DETALHES */}
+            <div className="space-y-6 md:space-y-8 mb-8">
+              <div>
+                <h4 className="font-semibold text-foreground mb-3 text-lg md:text-xl">Sabores disponíveis:</h4>
+                <p className="text-muted-foreground text-base md:text-lg">{product.flavors.join(", ")}</p>
               </div>
+
+              {(product.moods.length > 0 || product.occasions.length > 0) && (
+                <div>
+                  <h4 className="font-semibold text-foreground mb-3 text-lg md:text-xl">Ideal para:</h4>
+                  <div className="flex flex-wrap gap-3">
+                    {[...product.moods, ...product.occasions].map((tag) => (
+                      <Badge key={tag} variant="outline" className="text-sm md:text-base py-1 px-3">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Minimum Order */}
-            <div className="mb-6 p-4 bg-secondary rounded-lg">
-              <p className="text-sm font-medium">
-                <span className="text-primary">Pedido mínimo:</span> {product.minOrder}
-              </p>
+            {/* BOTÃO */}
+            <div className="mt-auto pt-8 pb-4 md:pb-0">
+              <Button asChild size="lg" className="w-full h-14 text-lg md:text-xl font-semibold bg-primary hover:bg-primary/90 shadow-lg transition-transform active:scale-95">
+                <Link href="/monte-sua-caixa" onClick={onClose}>
+                  Personalizar e Comprar
+                </Link>
+              </Button>
             </div>
 
-            {/* Price */}
-            <div className="mb-6">
-              <span className="text-4xl font-bold text-primary">R$ {product.price.toFixed(2)}</span>
-              <span className="text-muted-foreground ml-2">por unidade</span>
-            </div>
-
-            {/* Quantity Selector */}
-            <div className="mb-6">
-              <label className="font-semibold mb-2 block">Quantidade:</label>
-              <div className="flex items-center gap-4">
-                <Button variant="outline" size="icon" onClick={() => setQuantity(Math.max(1, quantity - 1))}>
-                  <Minus className="h-4 w-4" />
-                </Button>
-                <span className="text-xl font-semibold w-12 text-center">{quantity}</span>
-                <Button variant="outline" size="icon" onClick={() => setQuantity(quantity + 1)}>
-                  <Plus className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-
-            {/* Add to Bag Button */}
-            <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-lg" onClick={handleAddToBag}>
-              <ShoppingBag className="mr-2 h-5 w-5" />
-              Adicionar à Sacola
-            </Button>
           </div>
         </div>
       </DialogContent>

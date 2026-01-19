@@ -121,14 +121,6 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* About Section */}
-      <section className="py-20 container mx-auto px-4 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-4">{dadosInicio.about.title}</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">{dadosInicio.about.text}</p>
-        </div>
-      </section>
-
       {/* Process Timeline */}
       <section className="py-24 bg-muted">
         <div className="container mx-auto px-4 lg:px-8">
