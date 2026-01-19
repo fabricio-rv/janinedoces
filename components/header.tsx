@@ -38,6 +38,12 @@ export function Header() {
           >
             Monte sua Caixa
           </Link>
+          <Link
+            href="/monte-seu-ovo"
+            className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+          >
+            Monte seu Ovo
+          </Link>
           <Link href="/galeria" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
             Galeria
           </Link>
@@ -97,6 +103,13 @@ export function Header() {
               onClick={() => setIsMenuOpen(false)}
             >
               Monte sua Caixa
+            </Link>
+            <Link
+              href="/monte-seu-ovo"
+              className="text-base font-medium text-foreground hover:text-primary transition-colors py-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Monte seu Ovo
             </Link>
             <Link
               href="/galeria"

@@ -30,6 +30,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/monte-seu-ovo" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Monte seu Ovo
+                </Link>
+              </li>
+              <li>
                 <Link href="/galeria" className="text-muted-foreground hover:text-foreground transition-colors">
                   Galeria
                 </Link>
