@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import type { Product } from "@/lib/mock-data"
+import type { Product } from "@/data/types"
 import { ProductModal } from "@/components/product-modal"
 
 interface ProductCardProps {

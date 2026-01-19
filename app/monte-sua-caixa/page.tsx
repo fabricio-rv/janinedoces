@@ -8,31 +8,9 @@ import { Footer } from "@/components/footer"
 import { Check, ShoppingBag, Calculator } from "lucide-react"
 import { useQuoteBag } from "@/components/quote-bag-provider"
 import { PartyCalculator } from "@/components/party-calculator"
+import { dadosMonteCaixaDoces } from "@/data/monte-caixa"
 
-const boxSizes = [
-  { size: 6, price: 33, name: "Caixa 6 unidades" },
-  { size: 12, price: 60, name: "Caixa 12 unidades" },
-  { size: 24, price: 110, name: "Caixa 24 unidades" },
-]
-
-const availableFlavors = [
-  { id: "belga", name: "Belga", category: "Chocolate" },
-  { id: "meio-amargo", name: "Meio Amargo", category: "Chocolate" },
-  { id: "ninho", name: "Ninho", category: "Brigadeiro" },
-  { id: "ninho-nutella", name: "Ninho com Nutella", category: "Brigadeiro" },
-  { id: "pistache", name: "Pistache", category: "Premium" },
-  { id: "avela", name: "Avelã", category: "Chocolate" },
-  { id: "maracuja", name: "Maracujá", category: "Frutas" },
-  { id: "frutas-vermelhas", name: "Frutas Vermelhas", category: "Frutas" },
-  { id: "cafe", name: "Café", category: "Gourmet" },
-  { id: "coco", name: "Coco", category: "Tropical" },
-  { id: "oreo", name: "Oreo", category: "Brigadeiro" },
-  { id: "pacoca", name: "Paçoca", category: "Brigadeiro" },
-  { id: "caramelo", name: "Caramelo Salgado", category: "Gourmet" },
-  { id: "cappuccino", name: "Cappuccino", category: "Gourmet" },
-  { id: "limao", name: "Limão Siciliano", category: "Frutas" },
-  { id: "morango", name: "Morango", category: "Frutas" },
-]
+const { tamanhosCaixa: boxSizes, saboresDisponiveis: availableFlavors } = dadosMonteCaixaDoces
 
 export default function MonteSuaCaixaPage() {
   const [selectedSize, setSelectedSize] = useState<number>(6)

@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Minus, Plus, ShoppingBag } from "lucide-react"
-import type { Product } from "@/lib/mock-data"
+import type { Product } from "@/data/types"
 import { useQuoteBag } from "@/components/quote-bag-provider"
 
 interface ProductModalProps {

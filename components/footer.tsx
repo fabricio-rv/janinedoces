@@ -25,11 +25,6 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/colecoes" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Coleções
-                </Link>
-              </li>
-              <li>
                 <Link href="/monte-sua-caixa" className="text-muted-foreground hover:text-foreground transition-colors">
                   Monte sua Caixa
                 </Link>

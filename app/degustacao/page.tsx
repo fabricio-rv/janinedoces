@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
 import { Footer } from "@/components/footer"
 import { Sparkles } from "lucide-react"
-import { tasting } from "@/lib/mock-data"
+import { dadosTasting } from "@/data/tasting"
 
 export default function DegustacaoPage() {
   const [formData, setFormData] = useState({
@@ -25,7 +25,7 @@ export default function DegustacaoPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    const message = `${tasting.ctaTag}\n\nNome: ${formData.name}\nTelefone: ${formData.phone}\nData do Evento: ${formData.date}\nNúmero de Convidados: ${formData.guests}\nBairro: ${formData.neighborhood}\n\nMensagem: ${formData.message || "Gostaria de solicitar um kit degustação."}`
+    const message = `${dadosTasting.ctaTag}\n\nNome: ${formData.name}\nTelefone: ${formData.phone}\nData do Evento: ${formData.date}\nNúmero de Convidados: ${formData.guests}\nBairro: ${formData.neighborhood}\n\nMensagem: ${formData.message || "Gostaria de solicitar um kit degustação."}`
 
     const whatsappUrl = `https://wa.me/5551998116188?text=${encodeURIComponent(message)}`
     window.open(whatsappUrl, "_blank")
@@ -39,10 +39,10 @@ export default function DegustacaoPage() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex items-center justify-center gap-3 mb-6">
               <Sparkles className="h-8 w-8 text-primary" />
-              <h1 className="text-5xl md:text-6xl font-serif font-bold text-foreground">{tasting.name}</h1>
+              <h1 className="text-5xl md:text-6xl font-serif font-bold text-foreground">{dadosTasting.name}</h1>
             </div>
-            <p className="text-xl text-muted-foreground leading-relaxed">{tasting.description}</p>
-            <p className="text-sm text-muted-foreground italic mt-4">{tasting.note}</p>
+            <p className="text-xl text-muted-foreground leading-relaxed">{dadosTasting.description}</p>
+            <p className="text-sm text-muted-foreground italic mt-4">{dadosTasting.note}</p>
           </div>
         </div>
       </section>

@@ -1,0 +1,43 @@
+import type { Product } from "./types"
+
+export const dadosTrufas: Product[] = [
+  {
+    id: "trufa-caixa-2",
+    name: "Caixa com 2 Trufas",
+    category: "Trufas",
+    price: 12.0,
+    minOrder: "1 caixa",
+    badges: ["Linha fina"],
+    flavors: ["Belga", "Meio amargo", "Avelã", "Maracujá"],
+    moods: ["Para presente", "Para impressionar"],
+    occasions: ["Dia dos Namorados", "Dia das Mães", "Corporativo"],
+    image: "placeholder-trufas",
+    description: "Trufas artesanais feitas com chocolate belga premium e recheios sofisticados.",
+  },
+  {
+    id: "trufa-caixa-4",
+    name: "Caixa com 4 Trufas",
+    category: "Trufas",
+    price: 23.0,
+    minOrder: "1 caixa",
+    badges: ["Mais pedido"],
+    flavors: ["Belga", "Pistache", "Frutas vermelhas", "Café"],
+    moods: ["Para presente", "Para impressionar"],
+    occasions: ["Dia da Mulher", "Dia dos Professores", "Corporativo"],
+    image: "placeholder-trufas",
+    description: "Seleção de trufas gourmet com sabores únicos e apresentação elegante.",
+  },
+  {
+    id: "trufa-caixa-6",
+    name: "Caixa com 6 Trufas",
+    category: "Trufas",
+    price: 33.0,
+    minOrder: "1 caixa",
+    badges: ["Premium"],
+    flavors: ["Belga", "Avelã", "Coco", "Maracujá"],
+    moods: ["Para presente", "Para impressionar"],
+    occasions: ["Dia das Mães", "Dia dos Namorados"],
+    image: "placeholder-trufas",
+    description: "Coleção premium de trufas com ingredientes nobres e embalagem sofisticada.",
+  },
+]

@@ -2,12 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-
-const HERO_IMAGES = [
-  "/inicio/hero1.jpg",
-  "/inicio/hero2.jpg",
-  "/inicio/hero3.jpg",
-];
+import { dadosInicio } from "@/data/inicio";
 
 const TRANSITION_INTERVAL = 5000; // 5 seconds
 
@@ -16,17 +11,17 @@ export function Hero() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+      setCurrentIndex((prev) => (prev + 1) % dadosInicio.heroImages.length);
     }, TRANSITION_INTERVAL);
 
     return () => clearInterval(interval);
   }, []);
 
-  console.log("Current hero image:", HERO_IMAGES[currentIndex]);
+  console.log("Current hero image:", dadosInicio.heroImages[currentIndex]);
 
   return (
     <div className="absolute inset-0 z-0 bg-background">
-      {HERO_IMAGES.map((imageSrc, index) => (
+      {dadosInicio.heroImages.map((imageSrc, index) => (
         <div
           key={index}
           className="absolute inset-0 transition-opacity duration-1000"

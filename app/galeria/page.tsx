@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Footer } from "@/components/footer"
-import { galleryItems } from "@/lib/mock-data"
+import { dadosGaleria } from "@/data/galeria"
 
 export default function GaleriaPage() {
   return (
@@ -21,7 +21,7 @@ export default function GaleriaPage() {
       {/* Gallery Grid */}
       <section className="py-24 container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {galleryItems.map((item) => (
+          {dadosGaleria.map((item) => (
             <Card key={item.id} className="overflow-hidden border-2 hover:border-primary transition-all group">
               <div className="aspect-square relative overflow-hidden bg-muted">
                 <img

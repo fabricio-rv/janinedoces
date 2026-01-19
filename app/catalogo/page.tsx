@@ -5,35 +5,14 @@ import { Calculator, Search, X } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { products } from "@/lib/mock-data"
+import { ALL_PRODUCTS, CATEGORIES, MOODS, OCCASIONS } from "@/data"
 import { ProductCard } from "@/components/product-card"
 import { Footer } from "@/components/footer"
 import { PartyCalculator } from "@/components/party-calculator"
 
-const moods = ["Para Presente", "Para Festas", "Sofisticados", "Lembrancinhas", "Infantil", "Edição Limitada"]
-
-const categories = [
-  "Doces Tradicionais",
-  "Brigadeiros Gourmet",
-  "Especiais de Festa",
-  "Trufas",
-  "Ovos de Colher",
-]
-
-const occasions = [
-  "Batizado",
-  "Dia das Crianças",
-  "Dia das Mães",
-  "Dia dos Namorados",
-  "Dia dos Pais",
-  "Festa Junina",
-  "Maternidade",
-  "Chá de Bebê",
-  "Páscoa",
-  "Formatura",
-  "Casamento",
-  "15 Anos",
-]
+const moods = MOODS
+const categories = CATEGORIES
+const occasions = OCCASIONS
 
 export default function CatalogoPage() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -43,7 +22,7 @@ export default function CatalogoPage() {
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false)
 
   const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
+    return ALL_PRODUCTS.filter((product) => {
       // Search filter
       if (searchQuery) {
         const query = searchQuery.toLowerCase()

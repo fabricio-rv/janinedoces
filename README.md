@@ -1,6 +1,6 @@
 # Janine Bicca – Doces Finos
 
-Premium luxury confectionery website built with Next.js, TypeScript, Tailwind CSS, and Sanity CMS.
+Premium luxury confectionery website built with Next.js, TypeScript, and Tailwind CSS.
 
 ## 🍫 Features
 
@@ -12,7 +12,6 @@ Premium luxury confectionery website built with Next.js, TypeScript, Tailwind CS
 - **Gallery**: "Doces na Mesa" showcase with real event photos
 - **Tasting Kit**: Request degustação via WhatsApp form
 - **FAQ**: Accordion-style frequently asked questions
-- **Sanity CMS**: Headless CMS for easy content management
 
 ## 🚀 Getting Started
 
@@ -20,7 +19,6 @@ Premium luxury confectionery website built with Next.js, TypeScript, Tailwind CS
 
 - Node.js 18+ 
 - npm or yarn
-- Sanity account (for CMS)
 
 ### Installation
 
@@ -31,35 +29,23 @@ Premium luxury confectionery website built with Next.js, TypeScript, Tailwind CS
 npm install
 ```
 
-3. Set up environment variables:
-
-Create a \`.env.local\` file:
-
-```
-NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
-NEXT_PUBLIC_SANITY_DATASET=production
-```
-
-4. Run the development server:
+3. Run the development server:
 
 ```bash
 npm run dev
 ```
 
-5. Access the site at \`http://localhost:3000\`
-6. Access Sanity Studio at \`http://localhost:3000/studio\`
+4. Access the site at \`http://localhost:3000\`
 
 ## 📱 Key Pages
 
-- **/** - Homepage with hero, collections, and process timeline
+- **/** - Homepage with hero and process timeline
 - **/catalogo** - Full product catalog with filters and search
-- **/colecoes** - Collections overview and individual collection pages
 - **/monte-sua-caixa** - Interactive gift box builder with party calculator
 - **/galeria** - Event photo gallery
 - **/sobre** - About page with company story and values
 - **/degustacao** - Tasting kit request form
 - **/faq** - Frequently asked questions
-- **/studio** - Sanity CMS admin panel
 
 ## 🎨 Design
 
@@ -72,7 +58,6 @@ npm run dev
 - **Framework**: Next.js 16 with App Router
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4
-- **CMS**: Sanity.io
 - **Animation**: Framer Motion
 - **Components**: shadcn/ui
 

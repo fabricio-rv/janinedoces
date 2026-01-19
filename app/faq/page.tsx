@@ -1,7 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
-import { faqs } from "@/lib/mock-data"
+import { dadosFaqs } from "@/data/faq"
 
 export default function FAQPage() {
   return (
@@ -22,7 +22,7 @@ export default function FAQPage() {
       <section className="py-24 container mx-auto px-4 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="space-y-4">
-            {faqs.map((faq, index) => (
+            {dadosFaqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="border-2 rounded-lg px-6">
                 <AccordionTrigger className="text-lg font-semibold text-left hover:no-underline">
                   {faq.question}

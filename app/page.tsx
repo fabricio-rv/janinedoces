@@ -1,11 +1,10 @@
 import Link from "next/link"
 import { ArrowRight, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { seasonal, tasting } from "@/lib/mock-data"
 import { Footer } from "@/components/footer"
-import { client } from "@/sanity/lib/client"
 import { Hero } from "@/components/hero"
+import { dadosInicio } from "@/data/inicio"
+import { dadosTasting } from "@/data/tasting"
 
 export default function HomePage() {
   return (
@@ -49,58 +48,38 @@ export default function HomePage() {
       {/* Featured Products Preview - Moved to first position after hero */}
       <section className="py-24 container mx-auto px-4 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif font-semibold text-foreground mb-4">Doces</h2>
+          <h2 className="text-4xl md:text-5xl font-serif font-semibold text-foreground mb-4">
+            {dadosInicio.highlightedSweets.title}
+          </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Nossas especialidades mais amadas
+            {dadosInicio.highlightedSweets.subtitle}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="text-center">
-            <div className="aspect-square mb-6 rounded-lg overflow-hidden">
-              <img src="/inicio/doces1.jpg" alt="Trufas" className="w-full h-full object-cover" />
+          {dadosInicio.highlightedSweets.items.map((item) => (
+            <div key={item.title} className="text-center">
+              <div className="aspect-square mb-6 rounded-lg overflow-hidden">
+                <img src={item.image} alt={item.alt} className="w-full h-full object-cover" />
+              </div>
+              <h3 className="text-2xl font-serif font-semibold mb-3">{item.title}</h3>
+              <p className="text-muted-foreground mb-4 leading-relaxed">{item.description}</p>
+              <Button asChild variant="outline">
+                <Link href={item.link}>Ver {item.title}</Link>
+              </Button>
             </div>
-            <h3 className="text-2xl font-serif font-semibold mb-3">Trufas Belgas</h3>
-            <p className="text-muted-foreground mb-4 leading-relaxed">
-              Chocolate belga premium com recheios sofisticados
-            </p>
-            <Button asChild variant="outline">
-              <Link href="/catalogo?category=Trufas">Ver Trufas</Link>
-            </Button>
-          </div>
-
-          <div className="text-center">
-            <div className="aspect-square mb-6 rounded-lg overflow-hidden">
-              <img src="/inicio/doces2.jpg" alt="Brigadeiros" className="w-full h-full object-cover" />
-            </div>
-            <h3 className="text-2xl font-serif font-semibold mb-3">Brigadeiros Gourmet</h3>
-            <p className="text-muted-foreground mb-4 leading-relaxed">Sabores exclusivos com ingredientes nobres</p>
-            <Button asChild variant="outline">
-              <Link href="/catalogo?category=Brigadeiros">Ver Brigadeiros</Link>
-            </Button>
-          </div>
-
-          <div className="text-center">
-            <div className="aspect-square mb-6 rounded-lg overflow-hidden">
-              <img src="/inicio/doces3.jpg" alt="Doces Finos" className="w-full h-full object-cover" />
-            </div>
-            <h3 className="text-2xl font-serif font-semibold mb-3">Doces Finos</h3>
-            <p className="text-muted-foreground mb-4 leading-relaxed">Criações artesanais para ocasiões especiais</p>
-            <Button asChild variant="outline">
-              <Link href="/catalogo?category=Doces Finos">Ver Doces Finos</Link>
-            </Button>
-          </div>
+          ))}
         </div>
       </section>
 
       {/* Tasting Kit CTA - Moved before Páscoa */}
-      {tasting.enabled && (
+      {dadosTasting.enabled && (
         <section className="py-16 bg-secondary">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-4">{tasting.name}</h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">{tasting.description}</p>
-              <p className="text-sm text-muted-foreground mb-8 italic">{tasting.note}</p>
+              <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-4">{dadosTasting.name}</h2>
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">{dadosTasting.description}</p>
+              <p className="text-sm text-muted-foreground mb-8 italic">{dadosTasting.note}</p>
               <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
                 <Link href="/degustacao">Solicitar Degustação</Link>
               </Button>
@@ -110,63 +89,45 @@ export default function HomePage() {
       )}
 
       {/* Easter Seasonal Section - Redesigned with grid layout */}
-      {seasonal.easterEnabled && (
+      {dadosInicio.highlightedEaster.items.length > 0 && (
         <section className="py-24 bg-accent text-accent-foreground">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="text-center mb-16">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Sparkles className="h-6 w-6" />
-                <h2 className="text-4xl md:text-5xl font-serif font-semibold">Páscoa</h2>
+                <h2 className="text-4xl md:text-5xl font-serif font-semibold">{dadosInicio.highlightedEaster.title}</h2>
                 <Sparkles className="h-6 w-6" />
               </div>
               <p className="text-lg mb-6">
-                Sabores exclusivos: {seasonal.exampleFlavors.join(", ")}
+                Sabores exclusivos: {dadosInicio.highlightedEaster.flavors.join(", ")}
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-              <div className="text-center">
-                <div className="aspect-square mb-6 rounded-lg overflow-hidden">
-                  <img src="/inicio/ovo1.jpg" alt="Páscoa" className="w-full h-full object-cover" />
+              {dadosInicio.highlightedEaster.items.map((item) => (
+                <div key={item.title} className="text-center">
+                  <div className="aspect-square mb-6 rounded-lg overflow-hidden">
+                    <img src={item.image} alt={item.alt} className="w-full h-full object-cover" />
+                  </div>
+                  <h3 className="text-2xl font-serif font-semibold mb-3">{item.title}</h3>
+                  <p className="mb-4 leading-relaxed">{item.description}</p>
+                  <Button asChild className="bg-primary hover:bg-primary/90">
+                    <Link href={item.link}>Ver Opções</Link>
+                  </Button>
                 </div>
-                <h3 className="text-2xl font-serif font-semibold mb-3">Ovos Premium</h3>
-                <p className="mb-4 leading-relaxed">
-                  Ovos artesanais com chocolate belga e recheios sofisticados
-                </p>
-                <Button asChild className="bg-primary hover:bg-primary/90">
-                  <Link href="/catalogo?category=Páscoa">Ver Coleção</Link>
-                </Button>
-              </div>
-
-              <div className="text-center">
-                <div className="aspect-square mb-6 rounded-lg overflow-hidden">
-                  <img src="/inicio/ovo2.jpg" alt="Ovos Personalizados" className="w-full h-full object-cover" />
-                </div>
-                <h3 className="text-2xl font-serif font-semibold mb-3">Ovos Personalizados</h3>
-                <p className="mb-4 leading-relaxed">
-                  Criações exclusivas com seus sabores e designs personalizados
-                </p>
-                <Button asChild className="bg-primary hover:bg-primary/90">
-                  <Link href="/catalogo?category=Páscoa">Ver Opções</Link>
-                </Button>
-              </div>
-
-              <div className="text-center">
-                <div className="aspect-square mb-6 rounded-lg overflow-hidden">
-                  <img src="/inicio/ovo3.jpg" alt="Kits Especiais" className="w-full h-full object-cover" />
-                </div>
-                <h3 className="text-2xl font-serif font-semibold mb-3">Kits Especiais</h3>
-                <p className="mb-4 leading-relaxed">
-                  Combinações temáticas perfeitas para presentear
-                </p>
-                <Button asChild className="bg-primary hover:bg-primary/90">
-                  <Link href="/catalogo?category=Páscoa">Explorar Kits</Link>
-                </Button>
-              </div>
+              ))}
             </div>
           </div>
         </section>
       )}
+
+      {/* About Section */}
+      <section className="py-20 container mx-auto px-4 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-4">{dadosInicio.about.title}</h2>
+          <p className="text-lg text-muted-foreground leading-relaxed">{dadosInicio.about.text}</p>
+        </div>
+      </section>
 
       {/* Process Timeline */}
       <section className="py-24 bg-muted">

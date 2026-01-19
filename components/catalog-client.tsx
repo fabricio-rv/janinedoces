@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import { ProductCard } from "@/components/product-card"
 import { Footer } from "@/components/footer"
 
-// Opções iguais as que definimos no Sanity
+// Opções fixas (dados locais)
 const categories = ["Trufas", "Doces Finos", "Brigadeiros", "Páscoa", "Presentes"]
 const occasions = ["Dia das Mães", "Corporativo", "Casamento", "Dia dos Namorados"]
 
