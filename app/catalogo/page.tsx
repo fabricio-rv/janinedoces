@@ -5,42 +5,16 @@ import { Calculator, Search, X } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ALL_PRODUCTS } from "@/data"
+import { ALL_PRODUCTS, CATEGORIES } from "@/data"
 import { ProductCard } from "@/components/product-card"
 import { Footer } from "@/components/footer"
 import { PartyCalculator } from "@/components/party-calculator"
 
-const moods = ["Para Presente", "Para Festas", "Sofisticados", "Lembrancinhas", "Infantil", "Edição Limitada"]
-
-const categories = [
-  "Doces Tradicionais",
-  "Brigadeiros Gourmet",
-  "Doces Finos",
-  "Trufas",
-  "Ovos de Colher",
-  "Kits Especiais",
-]
-
-const occasions = [
-  "Batizado",
-  "Dia das Crianças",
-  "Dia das Mães",
-  "Dia dos Namorados",
-  "Dia dos Pais",
-  "Festa Junina",
-  "Maternidade",
-  "Chá de Bebê",
-  "Páscoa",
-  "Formatura",
-  "Casamento",
-  "15 Anos",
-]
+const categories = CATEGORIES
 
 export default function CatalogoPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-  const [selectedOccasion, setSelectedOccasion] = useState<string | null>(null)
-  const [selectedMood, setSelectedMood] = useState<string | null>(null)
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false)
 
   const filteredProducts = useMemo(() => {
@@ -61,28 +35,16 @@ export default function CatalogoPage() {
         return false
       }
 
-      // Occasion filter
-      if (selectedOccasion && !product.occasions.includes(selectedOccasion)) {
-        return false
-      }
-
-      // Mood filter
-      if (selectedMood && !product.moods.includes(selectedMood)) {
-        return false
-      }
-
       return true
     })
-  }, [searchQuery, selectedCategory, selectedOccasion, selectedMood])
+  }, [searchQuery, selectedCategory])
 
   const clearFilters = () => {
     setSearchQuery("")
     setSelectedCategory(null)
-    setSelectedOccasion(null)
-    setSelectedMood(null)
   }
 
-  const hasActiveFilters = searchQuery || selectedCategory || selectedOccasion || selectedMood
+  const hasActiveFilters = searchQuery || selectedCategory
 
   return (
     <main>
@@ -149,43 +111,6 @@ export default function CatalogoPage() {
               </div>
             </div>
 
-            {/* Mood Filters */}
-            <div>
-              <h3 className="text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">Mood</h3>
-              <div className="flex flex-wrap gap-2">
-                {moods.map((mood) => (
-                  <Badge
-                    key={mood}
-                    variant={selectedMood === mood ? "default" : "outline"}
-                    className={`cursor-pointer transition-all px-4 py-2 text-sm ${
-                      selectedMood === mood ? "bg-primary hover:bg-primary/90" : "hover:bg-accent"
-                    }`}
-                    onClick={() => setSelectedMood(selectedMood === mood ? null : mood)}
-                  >
-                    {mood}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-
-            {/* Occasion Filters */}
-            <div>
-              <h3 className="text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">Ocasiões</h3>
-              <div className="flex flex-wrap gap-2">
-                {occasions.map((occasion) => (
-                  <Badge
-                    key={occasion}
-                    variant={selectedOccasion === occasion ? "default" : "outline"}
-                    className={`cursor-pointer transition-all px-4 py-2 text-sm ${
-                      selectedOccasion === occasion ? "bg-primary hover:bg-primary/90" : "hover:bg-accent"
-                    }`}
-                    onClick={() => setSelectedOccasion(selectedOccasion === occasion ? null : occasion)}
-                  >
-                    {occasion}
-                  </Badge>
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* Clear Filters */}
