@@ -3,7 +3,7 @@ import type { Product } from "./types"
 export const dadosKits: Product[] = [
   {
     id: "presente-50",
-    name: "Caixa Presente – 50 Brigadeiros (Gourmet e Finos)",
+    name: "Caixa Presente 50 Brigadeiros",
     category: "Kits Especiais",
     price: 125.0,
     minOrder: "1 caixa",
@@ -16,7 +16,7 @@ export const dadosKits: Product[] = [
   },
   {
     id: "presente-100",
-    name: "Caixa Presente – 100 Brigadeiros (Gourmet e Finos)",
+    name: "Caixa Presente 100 Brigadeiros",
     category: "Kits Especiais",
     price: 195.0,
     minOrder: "1 caixa",

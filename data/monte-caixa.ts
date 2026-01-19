@@ -11,7 +11,7 @@ export const dadosMonteCaixaDoces = {
     gourmet: 1.9,
     finos: 2.8,
     trufas: 3.5,
-    kits: 2.8,
+    kits: 5,
   },
   precosTrufas: {
     grande: 2.8,

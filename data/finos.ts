@@ -42,7 +42,7 @@ export const dadosDocesFinos: Product[] = [
   },
   {
     id: "verrine-ninho",
-    name: "Verrine Ninho com Frutas Vermelhas",
+    name: "Ninho com Frutas Vermelhas",
     category: "Doces Finos",
     price: 6.5,
     minOrder: "mínimo 20 unidades",

@@ -3,7 +3,7 @@ import type { Product } from "./types"
 export const dadosOvos: Product[] = [
   {
     id: "ovo-colher-ninho",
-    name: "Ovo de Colher Ninho com Nutella",
+    name: "Ovo de Colher com Nutella",
     category: "Ovos de Colher",
     price: 45.0,
     minOrder: "1 unidade",

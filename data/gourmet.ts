@@ -3,7 +3,7 @@ import type { Product } from "./types"
 export const dadosBrigadeirosGourmet: Product[] = [
   {
     id: "brig-caixa-2",
-    name: "Caixa com 2 Brigadeiros (Tradicionais/Gourmet)",
+    name: "Caixa 2 Brigadeiros",
     category: "Brigadeiros Gourmet",
     price: 10.0,
     minOrder: "1 caixa",
@@ -16,7 +16,7 @@ export const dadosBrigadeirosGourmet: Product[] = [
   },
   {
     id: "brig-caixa-4",
-    name: "Caixa com 4 Brigadeiros (Tradicionais/Gourmet)",
+    name: "Caixa 4 Brigadeiros",
     category: "Brigadeiros Gourmet",
     price: 19.0,
     minOrder: "1 caixa",
@@ -29,7 +29,7 @@ export const dadosBrigadeirosGourmet: Product[] = [
   },
   {
     id: "brig-caixa-6",
-    name: "Caixa com 6 Brigadeiros (Tradicionais/Gourmet)",
+    name: "Caixa 6 Brigadeiros",
     category: "Brigadeiros Gourmet",
     price: 27.0,
     minOrder: "1 caixa",
@@ -42,7 +42,7 @@ export const dadosBrigadeirosGourmet: Product[] = [
   },
   {
     id: "brig-caixa-9",
-    name: "Caixa com 9 Brigadeiros (Tradicionais/Gourmet)",
+    name: "Caixa 9 Brigadeiros",
     category: "Brigadeiros Gourmet",
     price: 38.0,
     minOrder: "1 caixa",
@@ -55,7 +55,7 @@ export const dadosBrigadeirosGourmet: Product[] = [
   },
   {
     id: "brig-caixa-12",
-    name: "Caixa com 12 Brigadeiros (Tradicionais/Gourmet)",
+    name: "Caixa 12 Brigadeiros",
     category: "Brigadeiros Gourmet",
     price: 49.0,
     minOrder: "1 caixa",
