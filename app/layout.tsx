@@ -43,18 +43,22 @@ export const metadata: Metadata = {
     canonical: "https://janinebiccadoces.com.br/",
   },
   icons: {
+    // O ?v=2 obriga o Google a re-baixar a imagem e esquecer o cache da V0
     icon: [
-      { url: "/icon-light-32x32.png", media: "(prefers-color-scheme: light)" },
-      { url: "/icon-dark-32x32.png", media: "(prefers-color-scheme: dark)" },
-      { url: "/icon.png", type: "image/png" },
+      { url: "/icon.png?v=2", type: "image/png" },
     ],
-    apple: "/apple-icon.png",
+    shortcut: ["/icon.png?v=2"],
+    apple: [
+      { url: "/apple-icon.png?v=2" },
+    ],
   },
 }
 
-// ✅ themeColor vai AQUI (Next 16)
+// ✅ themeColor configurado corretamente para Next 14+
 export const viewport: Viewport = {
   themeColor: "#ffffff",
+  width: "device-width",
+  initialScale: 1,
 }
 
 const jsonLd = {
